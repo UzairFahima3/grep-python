@@ -12,8 +12,12 @@ def match_pattern(input_line, pattern):
     elif pattern == "\\w":
       return any(c.isalnum() or c == '_' for c in input_line)
     elif re.match(r"\[.*\]", pattern):
+      neg_char = pattern[1]
       chars_to_match = pattern[1:-1]
-      return any(c in chars_to_match for c in input_line)
+      if neg_char == '^':
+        return any(c not in chars_to_match for c in input_line)
+      else:
+        return any(c in chars_to_match for c in input_line)
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
