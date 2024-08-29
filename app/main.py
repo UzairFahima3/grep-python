@@ -28,6 +28,11 @@ def match_pattern(input_line, pattern):
     elif pattern[-1] == "$":
       if pattern[0:-1] == input_line:
         return True
+    elif "+" in pattern:
+      part = pattern.split("+")
+      left_part = part[-1]
+      if left_part in pattern:
+        return True
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
