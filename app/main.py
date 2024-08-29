@@ -18,6 +18,10 @@ def match_pattern(input_line, pattern):
         return any(c not in chars_to_match for c in input_line)
       else:
         return any(c in chars_to_match for c in input_line)
+    elif re.search(r"\\d", pattern) or re.search(r"\\w", pattern):
+        # Handle cases like '\d apple' or '\d\d\d apple'
+        regex_pattern = pattern.replace("\\d", r"\d").replace("\\w", r"\w")
+        return re.search(regex_pattern, input_line) is not None
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
