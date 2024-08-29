@@ -29,10 +29,8 @@ def match_pattern(input_line, pattern):
       if pattern[0:-1] == input_line:
         return True
     elif "+" in pattern:
-      part = pattern.split("+")
-      left_part = part[-1]
-      if left_part in pattern:
-        return True
+      regex_pattern = pattern.replace("+", r"+")
+      return re.search(regex_pattern, input_line) is not None
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
