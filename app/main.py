@@ -25,6 +25,9 @@ def match_pattern(input_line, pattern):
     elif pattern[0] == "^":
       if pattern[1:] == input_line:
         return True
+    elif pattern[-1] == "$":
+      if pattern[0:-1] == input_line:
+        return True
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
