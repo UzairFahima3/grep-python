@@ -28,9 +28,12 @@ def match_pattern(input_line, pattern):
     elif pattern[-1] == "$":
       if pattern[0:-1] == input_line:
         return True
-    elif "+" in pattern:
+    elif "+" in pattern or "?" in pattern:
       regex_pattern = pattern.replace("+", r"+")
       return re.search(regex_pattern, input_line) is not None
+    # elif "?" in pattern:
+    #   if pattern[:-1] in input_line:
+    #     return True 
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
