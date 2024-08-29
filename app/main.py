@@ -31,6 +31,9 @@ def match_pattern(input_line, pattern):
     elif "+" in pattern or "?" in pattern or "." in pattern:
       regex_pattern = pattern.replace("+", r"+").replace("?", r"?").replace(".", r".")
       return re.search(regex_pattern, input_line) is not None
+    elif '|' in pattern:
+      regex_pattern = pattern
+      return re.search(regex_pattern, input_line) is not None
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
