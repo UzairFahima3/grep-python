@@ -35,13 +35,11 @@ def match_pattern(input_line, pattern):
       regex_pattern = pattern
       return re.search(regex_pattern, input_line) is not None
     elif '\\' in pattern and re.search(r'\\\d', pattern):
-        # Handle backreferences
-        try:
-            # Compile the regex pattern with backreferences
-            regex_pattern = re.compile(pattern)
-            return regex_pattern.search(input_line) is not None
-        except re.error:
-            raise RuntimeError(f"Invalid backreference pattern: {pattern}")
+      try:
+        regex_pattern = re.compile(pattern)
+        return regex_pattern.search(input_line) is not None
+      except re.error:
+        raise RuntimeError(f"Invalid backreference pattern: {pattern}")
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
