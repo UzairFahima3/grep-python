@@ -22,6 +22,9 @@ def match_pattern(input_line, pattern):
         # Handle cases like '\d apple' or '\d\d\d apple'
         regex_pattern = pattern.replace("\\d", r"\d").replace("\\w", r"\w")
         return re.search(regex_pattern, input_line) is not None
+    elif pattern[0] == "^":
+      if pattern[1:] == input_line:
+        return True
     else:
         raise RuntimeError(f"Unhandled pattern: {pattern}")
 
